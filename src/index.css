@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@theme {
+  /* Base palette */
+  --color-bg-primary: #EAEDED;
+  --color-bg-secondary: #D5DBDB;
+  --color-border: #AAB7B8;
+  --color-text-secondary: #85929E;
+  --color-text-primary: #5D6D7E;
+
+  /* Interactive accents */
+  --color-accent-primary: #2E86C1;
+  --color-accent-hover: #1A5276;
+  --color-accent-light: #D4E6F1;
+
+  /* Semantic layer colours (Backpropagation) */
+  --color-layer-3: #2E86C1;
+  --color-layer-2: #27AE60;
+  --color-layer-1: #E67E22;
+
+  /* Typography */
+  --font-family-sans: "Inter", sans-serif;
+}
+
+/* Base styles */
+body {
+  font-family: var(--font-family-sans);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+  min-width: 1024px;
+  margin: 0;
+}
+
+/* KaTeX display math size override */
+.katex-display {
+  font-size: 17px;
+}

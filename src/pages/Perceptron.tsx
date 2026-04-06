@@ -82,11 +82,13 @@ export default function Perceptron() {
             Core Computation
           </h2>
           <p>
+            There can be multiple inputs, say from <InlineMath math="x_1" /> to <InlineMath math="x_n" />. 
             Each input <InlineMath math="x_i" /> is multiplied by a
             corresponding weight <InlineMath math="w_i" />. The products are
-            summed, a bias term <InlineMath math="b" /> is added to produce the
-            pre-activation value <InlineMath math="z" />, and an activation
-            function <InlineMath math="f" /> is applied to produce the output:
+            summed and a bias term <InlineMath math="b" /> is added to produce 
+            a the pre-activation value denoted by <InlineMath math="z" />. 
+            This <InlineMath math="z" /> value is then fed into an activation 
+            function <InlineMath math="f" /> to produce the final output of the neuron <InlineMath math="y" />:
           </p>
           <BlockMath math="y = f(z) = f\!\left(\sum_{i=1}^{n} w_i\, x_i + b\right)" />
           <ul className="list-disc pl-6 space-y-1 mt-2">
@@ -100,10 +102,92 @@ export default function Perceptron() {
               all inputs are zero.
             </li>
             <li>
-              <strong>Activation function</strong> (<InlineMath math="f" />)
-              determines the form of the output.
+              <strong>
+                <a 
+                  href="https://www.geeksforgeeks.org/machine-learning/activation-functions-neural-networks/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-accent-primary hover:text-accent-hover underline"
+                >
+                  Activation function
+                </a>
+              </strong>{' '}
+              (<InlineMath math="f" />) determines the form of the output.
             </li>
           </ul>
+        </div>
+
+        <div>
+          <h2 className="text-[18px] font-semibold text-text-primary mb-2">
+            Common Activation Functions
+          </h2>
+          <p>
+            The activation function <InlineMath math="f" /> transforms the
+            pre-activation value <InlineMath math="z" /> into the neuron's
+            output. Here are three common choices:
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-4">
+            {/* Step */}
+            <div className="space-y-2">
+              <h3 className="text-[15px] font-semibold text-text-primary">Step</h3>
+              <BlockMath math="f(z)=\begin{cases}1 & z \ge 0\\0 & z < 0\end{cases}" />
+              <svg viewBox="0 0 160 120" className="w-full max-w-[160px]">
+                {/* axes */}
+                <line x1="20" y1="60" x2="150" y2="60" stroke="#AAB7B8" strokeWidth="1" />
+                <line x1="80" y1="10" x2="80" y2="110" stroke="#AAB7B8" strokeWidth="1" />
+                {/* axis labels */}
+                <text x="150" y="55" fontSize="10" fill="#85929E">z</text>
+                <text x="85" y="16" fontSize="10" fill="#85929E">f(z)</text>
+                {/* tick marks */}
+                <text x="75" y="30" fontSize="9" fill="#85929E" textAnchor="end">1</text>
+                <line x1="78" y1="25" x2="82" y2="25" stroke="#AAB7B8" strokeWidth="0.8" />
+                {/* function */}
+                <line x1="20" y1="95" x2="80" y2="95" stroke="#2E86C1" strokeWidth="2" />
+                <line x1="80" y1="25" x2="145" y2="25" stroke="#2E86C1" strokeWidth="2" />
+                <circle cx="80" cy="25" r="3" fill="#2E86C1" />
+                <circle cx="80" cy="95" r="3" fill="white" stroke="#2E86C1" strokeWidth="1.5" />
+              </svg>
+            </div>
+
+            {/* Sigmoid */}
+            <div className="space-y-2">
+              <h3 className="text-[15px] font-semibold text-text-primary">Sigmoid</h3>
+              <BlockMath math="f(z)=\frac{1}{1+e^{-z}}" />
+              <svg viewBox="0 0 160 120" className="w-full max-w-[160px]">
+                <line x1="20" y1="60" x2="150" y2="60" stroke="#AAB7B8" strokeWidth="1" />
+                <line x1="80" y1="10" x2="80" y2="110" stroke="#AAB7B8" strokeWidth="1" />
+                <text x="150" y="55" fontSize="10" fill="#85929E">z</text>
+                <text x="85" y="16" fontSize="10" fill="#85929E">f(z)</text>
+                <text x="75" y="30" fontSize="9" fill="#85929E" textAnchor="end">1</text>
+                <line x1="78" y1="25" x2="82" y2="25" stroke="#AAB7B8" strokeWidth="0.8" />
+                {/* sigmoid curve as polyline — sampled from z = -5 to 5 */}
+                <polyline
+                  fill="none"
+                  stroke="#2E86C1"
+                  strokeWidth="2"
+                  strokeLinejoin="round"
+                  points="20,94 30,93 38,91 44,88 50,84 56,78 62,70 68,60 74,49 80,40 86,33 92,28 98,26 104,25 110,24 120,24 145,24"
+                />
+              </svg>
+            </div>
+
+            {/* ReLU */}
+            <div className="space-y-2">
+              <h3 className="text-[15px] font-semibold text-text-primary">ReLU</h3>
+              <BlockMath math="f(z)=\max(0,\,z)" />
+              <svg viewBox="0 0 160 120" className="w-full max-w-[160px]">
+                <line x1="20" y1="60" x2="150" y2="60" stroke="#AAB7B8" strokeWidth="1" />
+                <line x1="80" y1="10" x2="80" y2="110" stroke="#AAB7B8" strokeWidth="1" />
+                <text x="150" y="55" fontSize="10" fill="#85929E">z</text>
+                <text x="85" y="16" fontSize="10" fill="#85929E">f(z)</text>
+                {/* function: flat at 0 for z<0, linear for z>=0 */}
+                <line x1="20" y1="60" x2="80" y2="60" stroke="#2E86C1" strokeWidth="2" />
+                <line x1="80" y1="60" x2="140" y2="10" stroke="#2E86C1" strokeWidth="2" />
+                <circle cx="80" cy="60" r="3" fill="#2E86C1" />
+              </svg>
+            </div>
+          </div>
         </div>
 
         <div>
@@ -115,13 +199,13 @@ export default function Perceptron() {
             <li>
               <strong>Explicit bias</strong> — the bias{' '}
               <InlineMath math="b" /> appears as a separate additive term:
-              <BlockMath math="y = f\!\left(\sum_{i=1}^{n} w_i\, x_i + b\right)" />
+              <BlockMath math="y = f\!\left(\sum_{\textcolor{red}{i=1}}^{n} w_i\, x_i + b\right)" />
             </li>
             <li>
               <strong>Bias as weight</strong> — the bias is absorbed into the
               weight vector as <InlineMath math="w_0" /> with a fixed input{' '}
               <InlineMath math="x_0 = 1" />:
-              <BlockMath math="y = f\!\left(\sum_{i=0}^{n} w_i\, x_i\right)" />
+              <BlockMath math="y = f\!\left(\sum_{\textcolor{red}{i=0}}^{n} w_i\, x_i\right)" />
             </li>
           </ol>
           <p className="mt-2">
@@ -131,18 +215,7 @@ export default function Perceptron() {
           </p>
         </div>
 
-        <div>
-          <h2 className="text-[18px] font-semibold text-text-primary mb-2">
-            Decision Boundary
-          </h2>
-          <p>
-            With a step activation function, the perceptron acts as a binary
-            classifier. The equation{' '}
-            <InlineMath math="\sum w_i x_i + b = 0" /> defines a linear
-            decision boundary (hyperplane) in the input space, separating the
-            two output classes.
-          </p>
-        </div>
+
       </section>
 
       {/* ===== Interactive Section ===== */}
@@ -179,7 +252,7 @@ export default function Perceptron() {
         <div className="flex flex-wrap items-center gap-6">
           {/* Input count */}
           <div className="flex items-center gap-2">
-            <span className="text-sm text-text-secondary">Inputs:</span>
+            <span className="text-sm text-text-secondary">No. of Inputs:</span>
             <button
               onClick={removeInput}
               disabled={inputs.length <= 1}
@@ -316,6 +389,7 @@ export default function Perceptron() {
               weights={weights}
               bias={bias}
               representation={representation}
+              preActivation={preActivation}
               output={output}
               activationFn={activationFn}
             />

@@ -12,6 +12,7 @@ interface Props {
   weights: number[];
   bias: number;
   representation: 'explicit' | 'bias-as-weight';
+  preActivation: number;
   output: number;
   activationFn: string;
 }
@@ -29,6 +30,7 @@ export default function PerceptronDiagram({
   weights,
   bias,
   representation,
+  preActivation,
   output,
   activationFn,
 }: Props) {
@@ -221,11 +223,11 @@ export default function PerceptronDiagram({
         y={neuronY + 12}
         textAnchor="middle"
         dominantBaseline="central"
-        fontSize="15"
+        fontSize="13"
         fontWeight={600}
         fill="#5D6D7E"
       >
-        {output.toFixed(2)}
+        z = {preActivation.toFixed(2)}
       </text>
 
       {/* Output arrow */}
@@ -244,10 +246,9 @@ export default function PerceptronDiagram({
         textAnchor="start"
         dominantBaseline="central"
         fontSize="14"
-        fontStyle="italic"
         fill="#5D6D7E"
       >
-        y
+        y = {output.toFixed(2)}
       </text>
     </svg>
   );

@@ -1,3 +1,7 @@
+# private files 
+admin/
+page_design.md
+
 # Logs
 logs
 *.log

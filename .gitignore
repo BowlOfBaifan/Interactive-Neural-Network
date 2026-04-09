@@ -38,3 +38,6 @@ desktop.ini
 
 # Testing
 /coverage
+
+# production 
+dist/
